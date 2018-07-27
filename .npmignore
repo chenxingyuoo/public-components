@@ -1,4 +1,7 @@
+.*
+build
 .vscode
 node_modules
 yarn-error.log
+example
 dist/example

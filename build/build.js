@@ -6,7 +6,10 @@ const rm = require('rimraf')
 const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
-const webpackConfig = require('./webpack.prod.conf')
+const webpackConfig = process.argv[2] === 'build' ? require('./webpack.prod.conf') : require('./webpack.dist.prod.conf')
+
+
+
 
 const spinner = ora('building for production...')
 spinner.start()
@@ -30,9 +33,5 @@ rm(path.join(path.resolve(__dirname, '../dist'), 'static'), err => {
     }
 
     console.log(chalk.cyan('  Build complete.\n'))
-    console.log(chalk.yellow(
-      '  Tip: built files are meant to be served over an HTTP server.\n' +
-      '  Opening index.html over file:// won\'t work.\n'
-    ))
   })
 })

@@ -1,7 +1,7 @@
 'use strict'
 const path = require('path')
-const utils = require('./utils')
 const { VueLoaderPlugin } = require('vue-loader')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -11,14 +11,14 @@ module.exports = {
   resolve: {
     // 自动解析确定扩展，在引入模块的时候可以不加后缀
     extensions: ['.js', '.vue', '.json'],
-    alias: {
+    alias: { // 创建引入模块时使用的别名
       /**
-      * 创建引入时使用的别名
       * 如 import Vue from 'vue'
       * 等价于 import Vue from 'vue/dist/vue.esm.js'
+      * ‘@’ 指向根目录下的lib文件夹
       */
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('lib'),
     }
   },
   module: {
@@ -50,20 +50,21 @@ module.exports = {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000
+          publicPath: '../',
+          limit: 10000,
         }
       }
     ]
   },
   plugins: [
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(), // webpack 4 vue-loader需要这样使用
+    new FriendlyErrorsWebpackPlugin()  // webpack默认编译时会输出很多信息，使用该插件可以美化终端输出。
   ],
+  // 该选项是用来polyfill Node中的某些全局变量或者模块，让最初为Node.js环境写的代码可以在其他环境运行
   node: {
-    // prevent webpack from injecting useless setImmediate polyfill because Vue
-    // source contains it (although only uses it if it's native).
+    // 防止webpack注入setImmediate的ployfill，因为vue原本就包含了它
     setImmediate: false,
-    // prevent webpack from injecting mocks to Node native modules
-    // that does not make sense for the client
+    // 防止webpack注入到Nodejs的node_modules里，以下模块/变量在客户端不起作用
     dgram: 'empty',
     fs: 'empty',
     net: 'empty',

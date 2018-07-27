@@ -5,3 +5,6 @@ node_modules
 yarn-error.log
 example
 dist/example
+package-lock.json
+yarn.lock
+postcss.config.js

@@ -5,11 +5,11 @@
 ## npm 安裝 / yarn
 
 ```bash
-npm i hbf-components --save-dev
+npm i hbf-public-components --save-dev
 ```
 
 ```bash
-yarn add hbf-components -D
+yarn add hbf-public-components -D
 ```
 
 ## 按需引入

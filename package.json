@@ -2,7 +2,8 @@
   "name": "hbf-public-components",
   "version": "0.0.1",
   "description": "a public component Library from Huya-Base-Fed was base on Vue.js",
-  "main": "lib/index.js",
+  "main": "dist/hbf.min.js",
+  "module":"lib/index.js",
   "author": "ChenPt",
   "contributors": [
     "ChenPt"
@@ -10,7 +11,7 @@
   "scripts": {
     "dev": "webpack-dev-server   --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "distbuild": "node build/build.js distbuild",
+    "dist_build": "node build/build.js distbuild",
     "build": "node build/build.js build",
     "test": "node build/test.js"
   },
@@ -20,8 +21,8 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "iview": "^2.14.3",
-    "vue": "^2.5.2"
+    "iview": ">2.12.0",
+    "vue": ">2.3.0"
   },
   "dependencies": {
     "iview": "^2.14.3",

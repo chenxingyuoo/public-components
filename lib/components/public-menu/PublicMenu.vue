@@ -64,6 +64,7 @@
 </template>
 <script type="text/ecmascript-6">
 export default {
+  name: 'PublicMenu',
   props: {
     linkSet: {
       type: Array

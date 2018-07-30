@@ -27,7 +27,7 @@ yarn add babel-plugin-import -D
 ```javascript
 "plugins": [
   ["import", {
-    "libraryName": "hbf",
+    "libraryName": "hbf-public-components",
     "libraryDirectory": "lib/components"
   }]
 ]
@@ -36,7 +36,7 @@ yarn add babel-plugin-import -D
 ## 引入公共组件示例
 
 ```javascript
-import { publicMenu } from 'hbf'
+import { publicMenu } from 'hbf-public-components'
 
 export default {
   components: {

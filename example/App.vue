@@ -1,16 +1,28 @@
-<template>
+ <template>
   <div id="app">
     <public-menu :linkSet="linkSet"></public-menu>
+    <div class="hello">
+      <slider-custom
+        v-model="initData"
+        :range="range"
+        :formatter="formatter">
+      </slider-custom>
+    </div>
   </div>
 </template>
 
 <script>
-import publicMenu from '../lib/components/PublicMenu/PublicMenu'
+import publicMenu from '../lib/components/public-menu'
+import sliderCustom from '../lib/components/slider-custom'
+import { ts2Date } from '../lib/components/utils'
 
 export default {
   name: 'App',
   components: {
-    publicMenu
+    publicMenu,
+    sliderCustom
+  },
+  created () {
   },
   data () {
     return {
@@ -71,8 +83,30 @@ export default {
           "url": "http://autoidc-jingwei.huya.com/",
           "name": "混合云主机交付平台"
         }
+      ],
+      initData: [
+        +new Date() - 60 * 1000 * 5,
+        +new Date(),
+      ],
+      range: [
+        +new Date() - 60 * 1000 * 60,
+        +new Date(),
       ]
+    }
+  },
+  methods: {
+    formatter (ts) {
+      return ts2Date(ts, 'YYYY-MM-DD HH:MM')
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.hello {
+  width: 700px;
+  margin: 0 auto;
+  font-size: 14px;
+}
+</style>
+

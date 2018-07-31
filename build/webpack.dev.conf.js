@@ -6,6 +6,7 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const merge = require('webpack-merge')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpackBaseConfig = require('./webpack.base.conf.js')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const root = path.join(__dirname, '../')
@@ -18,7 +19,6 @@ module.exports = merge(webpackBaseConfig, {
     historyApiFallback: true, // 404的页面会自动跳转到/页面
     inline: true, // 文件改变自动刷新页面
     progress: true, // 显示编译进度
-    quiet: true,
     overlay: {
       errors: true // webpack出错直接贴到页面上
     },
@@ -34,6 +34,15 @@ module.exports = merge(webpackBaseConfig, {
           'postcss-loader',
           'sass-loader',
         ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'postcss-loader',
+          'less-loader'
+        ]
       }
     ]
   },
@@ -45,12 +54,11 @@ module.exports = merge(webpackBaseConfig, {
       template: path.join(__dirname, '../example/index.html'),
       inject: true
     }),
-    new FriendlyErrorsWebpackPlugin({
-      compilationSuccessInfo: {
-        messages: ['You application is running here http://localhost:3000'],
-        notes: ['构建成功']
-      },
-    })
-
+    // new FriendlyErrorsWebpackPlugin({
+    //   compilationSuccessInfo: {
+    //     messages: ['You application is running here http://localhost:3000'],
+    //     notes: ['构建成功']
+    //   },
+    // })
   ]
 })

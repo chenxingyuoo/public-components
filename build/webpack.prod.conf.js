@@ -7,7 +7,6 @@ const path = require('path')
 const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -16,6 +15,9 @@ const webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   entry: {
     main: './example/main.js'
+  },
+  performance: {
+    hints: false
   },
   optimization: {
     runtimeChunk: {
@@ -43,7 +45,12 @@ const webpackConfig = merge(baseWebpackConfig, {
         test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
           'postcss-loader',
           'sass-loader',
         ]
@@ -52,7 +59,12 @@ const webpackConfig = merge(baseWebpackConfig, {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: true
+            }
+          },
           'postcss-loader',
           'less-loader'
         ]
@@ -61,13 +73,12 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   output: {
     path: path.resolve(__dirname, '../dist/example'),
-    filename: '[name].[chunkhash:7].js',
+    filename: path.posix.join('./', './js/[name].[chunkhash:7].chunk.js'),
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].[chunkhash:7].css'
     }),
-    new OptimizeCSSPlugin({}),  // 压缩CSS
     new CleanWebpackPlugin(
       ['dist/example'],
       {

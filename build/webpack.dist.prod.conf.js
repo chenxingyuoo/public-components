@@ -42,6 +42,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     library: 'hbf',
     libraryTarget: 'umd'
   },
+  // 我们的library打包时不将vue和iview打包进去，由引用library者提供，
   externals: {
     vue: {
       root: 'Vue',

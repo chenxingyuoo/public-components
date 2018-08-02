@@ -1,7 +1,6 @@
 'use strict'
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -17,7 +16,7 @@ module.exports = {
       * 等价于 import Vue from 'vue/dist/vue.esm.js'
       * ‘@’ 指向根目录下的lib文件夹
       */
-      'vue$': 'vue/dist/vue.esm.js',
+      'vue$': 'vue/dist/vue.runtime.js',
       '@': resolve('lib'),
     }
   },
@@ -36,7 +35,8 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
-          limit: 10000
+          limit: 10000,
+          name: path.posix.join('./', 'image/[hash:7].[ext]')
         }
       },
       {
@@ -51,6 +51,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           publicPath: '../',
+          name: path.posix.join('./', './css/fonts/[name].[hash:7].[ext]'),
           limit: 10000,
         }
       }

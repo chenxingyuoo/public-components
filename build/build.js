@@ -7,11 +7,8 @@ const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const webpackConfig = process.argv[2] === 'build' ? require('./webpack.prod.conf') : require('./webpack.dist.prod.conf')
-
-
-
-
 const spinner = ora('building for production...')
+
 spinner.start()
 
 rm(path.join(path.resolve(__dirname, '../dist'), 'static'), err => {

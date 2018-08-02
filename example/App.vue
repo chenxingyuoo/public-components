@@ -104,7 +104,7 @@ export default {
 
 <style lang="scss" scoped>
 .hello {
-  width: 700px;
+  width: 600px;
   margin: 0 auto;
   font-size: 14px;
 }

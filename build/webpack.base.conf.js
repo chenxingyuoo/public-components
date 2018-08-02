@@ -18,6 +18,7 @@ module.exports = {
       */
       'vue$': 'vue/dist/vue.runtime.js',
       '@': resolve('lib'),
+      'components': resolve('lib/components')
     }
   },
   module: {

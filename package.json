@@ -8,8 +8,10 @@
   "contributors": [
     "ChenPt"
   ],
-  "keyword": [
-    "vue"
+  "keywords": [
+    "vue",
+    "components",
+    "hbf"
   ],
   "scripts": {
     "dev": "webpack-dev-server   --config build/webpack.dev.conf.js",

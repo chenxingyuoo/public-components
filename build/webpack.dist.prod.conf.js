@@ -40,7 +40,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/dist/',
     filename: 'hbf.min.js',
-    library: 'hbf-public-components',
+    library: {
+      root: 'Hbf',
+      commonjs: 'hbf-public-components',
+    },
     libraryTarget: 'umd'
   },
   // 我们的library打包时不将vue和iview打包进去，由引用library者提供，

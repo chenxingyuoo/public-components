@@ -1,6 +1,6 @@
 {
   "name": "hbf-public-components",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "a public component Library from Huya-Base-Fed was base on Vue.js",
   "main": "dist/hbf.min.js",
   "module": "lib/index.js",

@@ -19,6 +19,7 @@
         :current.sync='pageNo'
         :total='pageTotal'
         :page-size='pageSize'
+        show-total
         show-sizer
         show-elevator
         placement='top'
